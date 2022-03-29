@@ -9,10 +9,12 @@ import { Home, Payment, Product, Shipping, ShoppingCart, SignIn, SignUp, Summary
 import { AddEmployee, AddProduct, DashboardEmployee, DashboardProduct, EditEmployee, EditProduct} from './pages/private';
 import { Navbar } from './components';
 import { PUBLIC, PRIVATE } from "./constants/routes";
+import { AuthContextProvider } from "./context/auth-context";
 import './App.scss';
 
 function App() {
   return (
+    <AuthContextProvider>
       <BrowserRouter>
         <Routes>
         <Route path={PUBLIC.HOME} element={<Home />} />
@@ -27,9 +29,11 @@ function App() {
         <Route path={PUBLIC.SHIPPING} element={<Shipping />} />
         <Route path={PUBLIC.SHOPPING_CART} element={<ShoppingCart />} />
         <Route path={PUBLIC.SIGNUP} element={<SignUp />} />
+        <Route path={PUBLIC.SIGNIN} element={<SignIn />} />
         <Route path={PUBLIC.PRODUCT} element={<Product />} />
         </Routes>
       </BrowserRouter>
+      </AuthContextProvider>
   );
 }
 
