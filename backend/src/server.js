@@ -12,6 +12,6 @@ app.use(morgan("dev"));
 app.use(helmet());
 app.use(json());
 
-app.use("/product", productRouter);
+app.use("/products", productRouter);
 
 module.exports = app;
