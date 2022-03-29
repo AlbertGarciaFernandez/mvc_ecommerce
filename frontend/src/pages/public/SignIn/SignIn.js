@@ -1,59 +1,92 @@
 import React, { useState, useContext } from "react";
-import { Formik } from "formik";
-import { useHistory, Link } from "react-router-dom";
+import { useFormik } from "formik";
+import { useNavigate, Link } from "react-router-dom";
 
 import signInSchema from "./signInSchema";
 
-import Footer from "../../../components/Footer";
+import {Footer, Navbar, Input} from "../../../components";
+import AuthContext from "../../../context/auth-context";
 
 import { PUBLIC } from "../../../constants/routes";
 
 
 function SignIn() {
+
+  const [loginError, setLoginError] = useState(null);
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: signInSchema,
+    onSubmit: async (signInState) => {
+      try {
+        //await signInWithEmailAndPassword(
+          // signInState.email,
+          // signInState.password,
+        //);
+        //const data = await syncUserData();
+        // const token = await getCurrentUserToken();
+        login({
+          email: signInState.email,
+          //token: token,
+          //userId: data.data.userId._id,
+        });
+
+        navigate(PUBLIC.HOME);
+      } catch (error) {
+        setLoginError(error.message);
+      }
+    },
+  });
+
   return (
     <>
-      
+      <Navbar pageTitle="Sign in" />
       <div className="container flex-grow-1 align-items-center">
         <div className="row">
-          
-          <form onSubmit={Formik.handleSubmit}>
+        {loginError}
+          <form onSubmit={formik.handleSubmit}>
             <div className="col-3" />
             <div className="col-6">
               <div className="row m-3">
-                <input
+                <Input
                   id="email"
                   type="email"
                   label="E-mail"
                   placeholder="example@example.com"
-                  onChange={Formik.handleChange}
-                  onBlur={Formik.handleBlur}
-                  value={Formik.values.email}
-                  errorMessage={Formik.errors.email}
-                  hasErrorMessage={Formik.touched.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.email}
+                  errorMessage={formik.errors.email}
+                  hasErrorMessage={formik.touched.email}
                 />
               </div>
               <div className="row m-3">
-                <input
+                <Input
                   id="password"
                   type="password"
                   label="Password"
                   placeholder="Password"
-                  onChange={Formik.handleChange}
-                  onBlur={Formik.handleBlur}
-                  value={Formik.values.password}
-                  errorMessage={Formik.errors.password}
-                  hasErrorMessage={Formik.touched.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.password}
+                  errorMessage={formik.errors.password}
+                  hasErrorMessage={formik.touched.password}
                 />
               </div>
               <div className="d-flex m-4">
                 <div className="col-6">
-                  <button submitButton black>
+                  <button className="ms-3 btn btn-outline-dark medium-text">
                     Sign in
                   </button>
                 </div>
                 <div className="col-2 ms-auto">
                   <Link to={PUBLIC.SIGNUP}>
-                    <button black>Sign up</button>
+                    <button className="ms-3 btn btn-outline-dark medium-text">Sign up</button>
                   </Link>
                 </div>
               </div>

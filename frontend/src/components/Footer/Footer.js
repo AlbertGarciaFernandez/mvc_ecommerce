@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Footer.scss";
 
-export default function Footer() {
+ function Footer() {
   return (
     <footer className="">
       <div className="text-center p-3">
@@ -11,3 +11,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer

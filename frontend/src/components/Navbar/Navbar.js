@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import AuthContext from "../../context/auth-context";
 
@@ -10,11 +10,11 @@ import './Navbar.scss';
 function Navbar({ pageTitle, isLogged, IsCartItems }) {
   //const { cartItems } = useContext(CartContext);
   const { user, logout } = useContext(AuthContext);
-  //const history = useHistory();
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     if (!user) {
-      //history.push(PUBLIC.SIGNIN);
+      navigate(PUBLIC.SIGNIN);
       return;
     }
 

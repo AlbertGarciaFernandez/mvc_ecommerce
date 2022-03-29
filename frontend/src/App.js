@@ -7,7 +7,6 @@ import {
 
 import { Home, Payment, Product, Shipping, ShoppingCart, SignIn, SignUp, Summary } from './pages/public';
 import { AddEmployee, AddProduct, DashboardEmployee, DashboardProduct, EditEmployee, EditProduct} from './pages/private';
-import { Navbar } from './components';
 import { PUBLIC, PRIVATE } from "./constants/routes";
 import { AuthContextProvider } from "./context/auth-context";
 import './App.scss';
