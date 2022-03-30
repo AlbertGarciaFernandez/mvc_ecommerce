@@ -24,6 +24,10 @@ const UserSchema = new mongoose.Schema(
         message: (props) => `The email ${props.value} is not valid`,
       },
     },
+    profileImage: {
+      type: String,
+      trim: true,
+    },
     admin: {
       type: Boolean,
       default: false,
