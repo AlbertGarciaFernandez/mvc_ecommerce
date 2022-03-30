@@ -13,5 +13,6 @@ app.use(helmet());
 app.use(json());
 
 app.use("/products", productRouter);
+app.use("/users", productRouter);
 
 module.exports = app;
