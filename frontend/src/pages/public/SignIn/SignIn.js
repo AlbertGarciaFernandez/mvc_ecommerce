@@ -4,14 +4,14 @@ import { useNavigate, Link } from "react-router-dom";
 
 import signInSchema from "./signInSchema";
 
-import {Footer, Navbar, Input} from "../../../components";
+import { Footer, Navbar, Input } from "../../../components";
 import AuthContext from "../../../context/auth-context";
 
 import { PUBLIC } from "../../../constants/routes";
 
+import { signInWithEmailAndPassword } from "../../../firebase/firebase";
 
 function SignIn() {
-
   const [loginError, setLoginError] = useState(null);
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
@@ -24,10 +24,10 @@ function SignIn() {
     validationSchema: signInSchema,
     onSubmit: async (signInState) => {
       try {
-        //await signInWithEmailAndPassword(
-          // signInState.email,
-          // signInState.password,
-        //);
+        await signInWithEmailAndPassword(
+          signInState.email,
+          signInState.password
+        );
         //const data = await syncUserData();
         // const token = await getCurrentUserToken();
         login({
@@ -48,7 +48,7 @@ function SignIn() {
       <Navbar pageTitle="Sign in" />
       <div className="container flex-grow-1 align-items-center">
         <div className="row">
-        {loginError}
+          {loginError}
           <form onSubmit={formik.handleSubmit}>
             <div className="col-3" />
             <div className="col-6">
@@ -86,7 +86,9 @@ function SignIn() {
                 </div>
                 <div className="col-2 ms-auto">
                   <Link to={PUBLIC.SIGNUP}>
-                    <button className="ms-3 btn btn-outline-dark medium-text">Sign up</button>
+                    <button className="ms-3 btn btn-outline-dark medium-text">
+                      Sign up
+                    </button>
                   </Link>
                 </div>
               </div>
@@ -99,4 +101,4 @@ function SignIn() {
   );
 }
 
-export default SignIn
+export default SignIn;
