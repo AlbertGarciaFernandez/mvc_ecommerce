@@ -1,14 +1,20 @@
 import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
-import { useNavigate, Link, } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import signUpSchema from "./singUpSchema";
 
-import {Footer, Navbar, Input} from "../../../components";
+import { Footer, Navbar, Input } from "../../../components";
 import AuthContext from "../../../context/auth-context";
 
 import { PUBLIC } from "../../../constants/routes";
 
+import { syncUserData } from "../../../utils/auth-requests";
+
+import {
+  signUpWithEmailAndPassword,
+  getCurrentUserToken,
+} from "../../../firebase/firebase";
 
 function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -33,16 +39,19 @@ function SignUp() {
       setLoggedIn(false);
 
       try {
-        //await signUpWithEmailAndPassword(
-          //signUpState.email,
-          //signUpState.password,
-        //);
-        //const data = await sendUserData(signUpState.firstName);
-        //const token = await getCurrentUserToken();
+        // await signUpWithEmailAndPassword(signUpState.email, signUpState.password);
+        //await syncUserData();
+        await signUpWithEmailAndPassword(
+          signUpState.email,
+          signUpState.password
+        );
+        const data = await syncUserData(signUpState.firstName);
+        const token = await getCurrentUserToken();
+        //await syncUserData();
         login({
           email: signUpState.email,
-          // token: token,
-          // userId: data.data.userId,
+          token: token,
+          userId: data.data.userId,
         });
         navigate(PUBLIC.HOME);
 
@@ -111,11 +120,8 @@ function SignUp() {
                     Sign up
                   </button>
                 </div>
-                
               </div>
-              
             </div>
-           
           </form>
         </div>
       </div>
@@ -124,4 +130,4 @@ function SignUp() {
   );
 }
 
-export default SignUp
+export default SignUp;
