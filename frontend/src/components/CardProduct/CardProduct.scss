@@ -1,0 +1,16 @@
+.product-card-img {
+    object-fit: scale-down;
+    max-height: min(200px);
+  }
+  
+.product-card-img-container {
+    height: 30vw;
+  }
+  
+  a:active,
+  a:hover,
+  a:link,
+  a:visited {
+    text-decoration: none;
+    color: unset !important;
+  }
