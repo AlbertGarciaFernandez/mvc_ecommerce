@@ -6,15 +6,16 @@ const { json } = require("body-parser");
 const cors = require("cors");
 
 const productRouter = require("./routes/product-routes");
+const userRouter = require("./routes/user-routes");
 const config = require("./config/config");
 const app = express();
 
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(json());
-app.use(cors({origin: config.client.URL,}),);
+app.use(cors({ origin: config.client.URL }));
 
 app.use("/products", productRouter);
-app.use("/users", productRouter);
+app.use("/users", userRouter);
 
 module.exports = app;

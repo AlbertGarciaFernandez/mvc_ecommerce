@@ -1,7 +1,7 @@
 const db = require("../models");
 
 async function signUp(req, res, next) {
-  const { uid, email } = req.user;
+  const { uid, email, firstName } = req.user;
 
   try {
     const user = await db.User.findOne({ email: email });
@@ -13,6 +13,7 @@ async function signUp(req, res, next) {
     const newUser = await db.User.create({
       _id: uid,
       email: email,
+      firstName: firstName,
     });
 
     res.sendStatus(201);
@@ -33,7 +34,7 @@ async function getUsers(req, res, next) {
   }
 }
 
-async function getSinglerUser(req, res, next) {
+async function getSingleUser(req, res, next) {
   const { userId } = req.params;
 
   try {
@@ -100,7 +101,7 @@ async function deleteUser(req, res, next) {
 module.exports = {
   signUp: signUp,
   getUsers: getUsers,
-  getSinglerUser: getSinglerUser,
+  getSingleUser: getSingleUser,
   updateUser: updateUser,
   deleteUser: deleteUser,
 };
