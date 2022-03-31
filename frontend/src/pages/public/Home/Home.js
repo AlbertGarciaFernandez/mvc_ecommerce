@@ -28,7 +28,7 @@ function Home() {
     
     <div>Home
     <Navbar />
-    <Footer />
+    
 
     <div>
       <div className="row page-div">
@@ -43,7 +43,7 @@ function Home() {
         </div>
       </div>
     </div>
-
+    <Footer />
     </div>
   )
 }

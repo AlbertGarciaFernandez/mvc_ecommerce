@@ -2,7 +2,7 @@
 
 export const PUBLIC = {
     HOME: "/",
-    PRODUCT: "/product",
+    PRODUCT: "/product/:productId",
     SHOPPING_CART: "/shopping-cart",
     SHIPPING: "/checkout/shipping",
     PAYMENT: "/checkout/payment",
