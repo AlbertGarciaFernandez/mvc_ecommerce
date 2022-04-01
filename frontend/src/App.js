@@ -9,11 +9,13 @@ import { Home, Payment, Product, Shipping, ShoppingCart, SignIn, SignUp, Summary
 import { AddEmployee, AddProduct, DashboardEmployee, DashboardProduct, EditEmployee, EditProduct} from './pages/private';
 import { PUBLIC, PRIVATE } from "./constants/routes";
 import { AuthContextProvider } from "./context/auth-context";
+import { CartContextProvider } from "./context/cart-context";
 import './App.scss';
 
 function App() {
   return (
     <AuthContextProvider>
+      <CartContextProvider>
       <BrowserRouter>
         <Routes>
         <Route path={PUBLIC.HOME} element={<Home />} />
@@ -32,6 +34,7 @@ function App() {
         <Route path={PUBLIC.PRODUCT} element={<Product />} />
         </Routes>
       </BrowserRouter>
+      </CartContextProvider>
       </AuthContextProvider>
   );
 }
